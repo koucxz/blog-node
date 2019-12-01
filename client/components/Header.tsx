@@ -10,7 +10,7 @@ const Header: React.FunctionComponent = () => {
 
   useEffect(() => {
     setHref(Router.pathname)
-  })
+  }, [])
 
   return (
     <header className={styles.header}>
