@@ -2,6 +2,8 @@
   "extends": "eslint-config-egg",
   "rules": {
     "semi": 0,
-    "space-before-function-paren": ["error", "always"]
+    "space-before-function-paren": ["error", "always"],
+    "comma-dangle": 0,
+    "strict": 0
   }
 }
