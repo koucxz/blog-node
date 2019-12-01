@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Row, Menu, Icon } from 'antd'
 
 const Header: React.FunctionComponent = () => {
-  const [href, setHref] = useState()
+  const [href, setHref] = useState<string>('')
 
   useEffect(() => {
     setHref(Router.pathname)
