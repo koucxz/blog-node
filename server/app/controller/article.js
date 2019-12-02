@@ -1,7 +1,6 @@
 'use strict';
 
 const Controller = require('egg').Controller
-const moment = require('moment')
 
 class HomeController extends Controller {
   async createArticle () {
@@ -22,7 +21,7 @@ class HomeController extends Controller {
       id, type, title, content, introduce,
     } = this.ctx.request.body
 
-    await ctx.service.article.update({ id, type, title, content, introduce, })
+    await this.ctx.service.article.update({ id, type, title, content, introduce, })
 
     this.ctx.body = { data: null }
   }
@@ -35,8 +34,8 @@ class HomeController extends Controller {
 
   async getArticleById () {
     const id = this.ctx.params.id
-    
-    const result = await  this.ctx.service.article.find(id)
+
+    const result = await this.ctx.service.article.find(id)
 
     this.ctx.body = { data: result }
   }
