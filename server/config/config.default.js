@@ -38,6 +38,10 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  config.security = {
+    domainWhiteList: [ 'http://localhost:3000', 'https://koucxz.github.io/' ],
+  };
+
   return {
     ...config,
     ...userConfig,
