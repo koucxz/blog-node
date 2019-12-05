@@ -47,11 +47,7 @@ class ArticleService extends Service {
   }
 
   async find (id) {
-    const sql = `BEGIN;
-                 UPDATE article
-                 SET view_count = view_count + 1
-                 WHERE article.id = ${id};
-                 SELECT a.id as id,
+    const sqlRead = `SELECT a.id as id,
                         a.title as title,
                         a.introduce as introduce,
                         a.content as content,
@@ -61,9 +57,14 @@ class ArticleService extends Service {
                         t.typeName as type
                  FROM article a
                  LEFT JOIN type t ON a.type_id = t.id
-                 WHERE a.id=${id};
-                 COMMIT;`
-    const result = await this.app.mysql.query(sql)
+                 WHERE a.id=${id};`
+    const sqlUpdate = `UPDATE article
+                       SET view_count = view_count + 1
+                       WHERE article.id = ${id};`
+    const result = await this.app.mysql.beginTransactionScope(function* (conn) {
+      yield conn.query(sqlUpdate);
+      return yield conn.query(sqlRead);
+    });
     result.create_time = moment(result.create_time).format('YYYY-MM-DD HH:mm')
     result.update_time = moment(result.update_time).format('YYYY-MM-DD HH:mm')
     return result
