@@ -46,11 +46,10 @@ const DetailPage: NextPage<Props> = ({ article }) => {
   )
 }
 
-DetailPage.getInitialProps = async ({ query }: any) => {
+DetailPage.getInitialProps = async ({ query }) => {
   let article
   try {
     const res = await axios('http://127.0.0.1:7001/articles/' + query.id)
-    console.log(res)
     article = res.data.data[0] || {}
   } catch (err) {}
 
