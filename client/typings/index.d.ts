@@ -2,7 +2,7 @@ import { string } from "prop-types"
 
 declare type ns = number | string
 
-declare interface Article {
+interface Article {
   id: number,
   title: string,
   introduce?: string,

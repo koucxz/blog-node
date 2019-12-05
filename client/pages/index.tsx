@@ -6,6 +6,7 @@ import { Article } from '../typings'
 import { List, Icon } from 'antd'
 import * as styles from './index.styl'
 import axios from 'axios'
+import Link from 'next/link'
 
 interface Props {
   list?: Article[]
@@ -20,7 +21,7 @@ const IndexPage: NextPage<Props> = ({ list }) => {
         dataSource={list}
         renderItem={item => (
           <List.Item className={styles.item}>
-            <div className={styles.title}>{item.title}</div>
+            <Link href={{ pathname: 'detail', query: { id: item.id } }}><a className={styles.title}>{item.title}</a></Link>
             <div className={styles.desc}>
               <span className={styles.icon}><Icon type="calendar" />{item.update_time}</span>
               <span className={styles.icon}><Icon type="folder" />{item.type}</span>
